@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troia la Romana · Pizza &amp; Gelato · Marina de Tróia</title>
+<meta name="description" content="Pizzaria e trattoria na Marina de Tróia. Pizzas de massa fina, pastas, marisco e gelato. Reservas pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Allura&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1216; --ink-2:#161B21; --ink-3:#1F262E;
+  --cream:#F5EEE3; --cream-2:#EBE1D2; --paper:#FBF7F1;
+  --red:#E3122F; --red-d:#B80D25; --green:#1E5B3A; --gold:#C9A35B;
+  --muted:#8C949C; --line:rgba(255,255,255,.12); --line-d:rgba(14,18,22,.12);
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1);
+  --serif:"Cormorant",Georgia,serif; --script:"Allura",cursive; --sans:"Manrope",system-ui,sans-serif;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.eyebrow{font:600 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+.h2{font:500 clamp(38px,5.2vw,64px)/1.02 var(--serif);letter-spacing:-.01em}
+.h2 em{font-style:italic;color:var(--red)}
+.lead{font-size:17px;color:#4A525A;max-width:56ch}
+.flag{display:inline-flex;height:10px;width:24px;border-radius:2px;overflow:hidden;vertical-align:middle}
+.flag i{flex:1}.flag i:nth-child(1){background:#1E8B4C}.flag i:nth-child(2){background:#fff}.flag i:nth-child(3){background:var(--red)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform 160ms var(--ease-out),background-color 200ms ease,color 200ms ease,box-shadow 200ms ease;will-change:transform}
+.btn:active{transform:scale(.97)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px -10px rgba(227,18,47,.6)}
+.btn-ghost{border:1px solid rgba(255,255,255,.28);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+@media (hover:hover) and (pointer:fine){
+  .btn-red:hover{background:var(--red-d)}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .btn-dark:hover{background:#000}
+}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* Preview bar */
+.preview{background:#000;color:#cfd3d7;font-size:12.5px;text-align:center;padding:9px 44px;position:relative;letter-spacing:.01em}
+.preview b{color:#fff;font-weight:600}
+.preview button{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;color:#9aa0a6}
+.preview button:hover{color:#fff}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(14,18,22,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line);color:#fff}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;flex-direction:column;align-items:center;line-height:1}
+.logo b{font:500 22px/1 var(--serif);letter-spacing:.14em;white-space:nowrap}
+@media (max-width:520px){.logo b{font-size:17px;letter-spacing:.1em}.logo span{font-size:23px}.lang button{padding:6px 8px}}
+.logo span{font:28px/0.7 var(--script);color:#e9e2d6;margin-top:2px}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:14px;font-weight:500}
+.nav ul a{opacity:.78;transition:opacity 200ms ease}
+.nav ul a:hover{opacity:1}
+.nav-r{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;font-size:12px;font-weight:700}
+.lang button{padding:6px 10px;border-radius:999px;color:#aab;transition:background-color 200ms ease,color 200ms ease}
+.lang button[aria-pressed=true]{background:#fff;color:var(--ink)}
+.nav .btn{padding:11px 18px;font-size:14px}
+@media (max-width:900px){.nav ul{display:none}.nav .btn span{display:none}.nav .btn{padding:11px}}
+
+/* Hero */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:780px;height:780px;background:radial-gradient(closest-side,rgba(227,18,47,.22),transparent);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:84px 0 96px;position:relative}
+.hero h1{font:500 clamp(48px,7.2vw,96px)/.95 var(--serif);letter-spacing:-.015em;margin:22px 0 22px}
+.hero h1 em{font-style:italic;color:#F2C6A0}
+.hero h1 .scr{font:400 1.05em/0.8 var(--script);color:var(--red);display:inline-block;transform:translateY(.06em);letter-spacing:0}
+.hero p.lead{color:#B9C0C7}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin:34px 0 40px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:#D9DEE3;background:rgba(255,255,255,.03)}
+.chip b{color:#fff}
+.chip svg{width:14px;height:14px;color:var(--gold)}
+.collage{position:relative;height:600px}
+.collage figure{position:absolute;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.collage img{width:100%;height:100%;object-fit:cover}
+.c1{inset:0 18% 12% 6%;transform:rotate(-2deg)}
+.c2{width:46%;height:44%;right:0;bottom:0;border:6px solid var(--ink);transform:rotate(3deg)}
+.c3{width:34%;aspect-ratio:1;left:-4%;bottom:2%;border:6px solid var(--ink);border-radius:50% !important}
+.stamp{position:absolute;top:6%;right:4%;width:120px;height:120px;border-radius:50%;background:var(--red);display:grid;place-items:center;text-align:center;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;transform:rotate(10deg);box-shadow:0 20px 40px -12px rgba(227,18,47,.6)}
+.stamp b{display:block;font:500 30px/1 var(--serif);letter-spacing:0;text-transform:none}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding:56px 0 64px}.collage{height:440px}}
+
+/* Ticker */
+.ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;padding:16px 0}
+.ticker-track{display:inline-flex;gap:40px;animation:tick 38s linear infinite;font:italic 500 26px/1 var(--serif)}
+.ticker-track span{display:inline-flex;align-items:center;gap:40px}
+.ticker-track span::after{content:"✦";font-style:normal;font-size:14px;opacity:.7}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Sections */
+section{padding:110px 0}
+@media (max-width:700px){section{padding:76px 0}.sec-head{margin-bottom:36px}}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+.sec-head .h2{margin-top:14px}
+
+/* About */
+.about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:center}
+.about-img{position:relative}
+.about-img img{border-radius:var(--r);aspect-ratio:4/5;object-fit:cover;width:100%}
+.about-img .tag{position:absolute;left:-24px;bottom:36px;background:var(--paper);border-radius:14px;padding:18px 20px;box-shadow:0 30px 60px -25px rgba(14,18,22,.35);max-width:260px}
+.about-img .tag q{font:italic 500 21px/1.2 var(--serif);quotes:"“" "”"}
+.about-img .tag small{display:block;margin-top:8px;font-size:12px;color:var(--muted)}
+.about p+p{margin-top:16px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d);border-radius:14px;overflow:hidden;margin-top:40px}
+.facts div{background:var(--paper);padding:20px}
+.facts b{display:block;font:500 34px/1 var(--serif)}
+.facts span{font-size:13px;color:#5B636B}
+@media (max-width:900px){.about .wrap{grid-template-columns:1fr;gap:48px}.about-img .tag{left:12px}}
+
+/* Signature */
+.sig{background:var(--cream)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--paper);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform 300ms var(--ease-out),box-shadow 300ms var(--ease-out)}
+.card .ph{aspect-ratio:3/4;overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.card:hover{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(14,18,22,.45)}.card:hover img{transform:scale(1.04)}}
+.card .bd{padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font:500 26px/1.05 var(--serif)}
+.card p{font-size:14px;color:#5B636B;flex:1}
+.card .pr{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-weight:700}
+.card .pr span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:600}
+@media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.cards{grid-template-columns:1fr}.card .ph{aspect-ratio:4/3}}
+
+/* Menu */
+.menu{background:var(--ink);color:#fff}
+.menu .lead{color:#AEB5BC}
+.tabs-wrap{position:sticky;top:72px;z-index:5;background:var(--ink);padding:14px 0;margin-bottom:28px;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-mask:linear-gradient(90deg,#000 92%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:10px 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:600;color:#C5CBD1;transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,transform 160ms var(--ease-out)}
+.tab:active{transform:scale(.97)}
+.tab[aria-selected=true]{background:#fff;color:var(--ink);border-color:#fff}
+@media (hover:hover) and (pointer:fine){.tab:not([aria-selected=true]):hover{border-color:rgba(255,255,255,.4);color:#fff}}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;transition:opacity 180ms ease,filter 180ms ease}
+.menu-grid.swap{opacity:0;filter:blur(3px)}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:18px 0;border-bottom:1px dashed rgba(255,255,255,.14)}
+.item h4{font:500 22px/1.2 var(--serif)}
+.item .p{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;align-self:start;padding-top:3px}
+.item .d{grid-column:1/-1;font-size:14px;color:#9AA2AA}
+.item .badge{display:inline-block;margin-left:8px;font:700 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--red);vertical-align:middle;border:1px solid var(--red);border-radius:999px;padding:4px 7px}
+.sub{grid-column:1/-1;font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:32px 0 6px}
+.menu-note{margin-top:30px;font-size:13px;color:var(--muted)}
+@media (max-width:760px){.menu-grid{grid-template-columns:1fr}}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+.gal figure{border-radius:14px;overflow:hidden;position:relative;background:var(--cream-2)}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 700ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.gal figure:hover img{transform:scale(1.05)}}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(14,18,22,.7);backdrop-filter:blur(8px);color:#fff;font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px}
+.g1{grid-column:span 2;grid-row:span 2}.g2{grid-row:span 2}.g5{grid-column:span 2}
+@media (max-width:820px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}.g5{grid-column:span 2}.g2{grid-row:span 1}}
+
+/* Reviews */
+.reviews{background:var(--cream)}
+.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
+.score{background:var(--paper);border-radius:var(--r);padding:28px}
+.score b{font:500 64px/1 var(--serif)}
+.score .stars{color:var(--red);letter-spacing:2px;margin:6px 0 4px}
+.score small{color:#5B636B;font-size:14px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.quote{background:var(--paper);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:18px}
+.quote q{font:italic 500 24px/1.25 var(--serif);quotes:"“" "”";flex:1}
+.quote footer{font-size:13px;color:#5B636B;display:flex;justify-content:space-between}
+.quote footer b{color:var(--ink)}
+@media (max-width:900px){.scores,.quotes{grid-template-columns:1fr}}
+
+/* Visit / Reserve */
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.panel{border-radius:22px;padding:40px}
+.panel.dark{background:var(--ink);color:#fff}
+.panel.light{background:var(--cream)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#AEB5BC}
+label.full{grid-column:1/-1}
+input,select,textarea{font:500 16px var(--sans);color:#fff;background:var(--ink-3);border:1px solid var(--line);border-radius:12px;padding:14px;outline:none;transition:border-color 200ms ease,box-shadow 200ms ease;width:100%;color-scheme:dark}
+textarea{resize:vertical;min-height:84px}
+input:focus,select:focus,textarea:focus{border-color:rgba(255,255,255,.45);box-shadow:0 0 0 4px rgba(255,255,255,.06)}
+form .btn{grid-column:1/-1;justify-content:center;padding:17px}
+.form-note{grid-column:1/-1;font-size:12.5px;color:var(--muted);text-align:center}
+.hours{margin-top:22px;border-top:1px solid var(--line-d)}
+.hours div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line-d);font-size:15px}
+.hours div.today{font-weight:700}
+.hours div.today span:first-child::after{content:"  •";color:var(--red)}
+.contact{display:grid;gap:12px;margin-top:26px}
+.contact a,.contact div{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:var(--paper);font-weight:600;font-size:15px;transition:transform 160ms var(--ease-out)}
+.contact a:active{transform:scale(.98)}
+.contact svg{width:20px;height:20px;color:var(--red);flex:none}
+.contact small{display:block;font-weight:500;color:#5B636B;font-size:12.5px}
+.map{margin-top:12px;border-radius:14px;overflow:hidden;position:relative;height:180px;background:#dfe9ea}
+.map svg{width:100%;height:100%}
+.map a{position:absolute;right:12px;bottom:12px}
+@media (max-width:900px){.visit .wrap{grid-template-columns:1fr}.panel{padding:28px}form{grid-template-columns:1fr}}
+
+.panel.dark{display:flex;flex-direction:column}
+.perks{margin-top:auto;padding-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-radius:14px;overflow:hidden}
+.perks div{background:var(--ink-2);padding:18px 16px;display:flex;flex-direction:column;gap:4px}
+.perks{background:none;gap:10px}.perks div{border:1px solid var(--line);border-radius:14px}
+.perks b{font:500 21px/1.1 var(--serif);color:#fff}
+.perks span{font-size:13px;color:#9AA2AA;line-height:1.4}
+@media (max-width:600px){.perks{grid-template-columns:1fr}}
+/* Footer */
+footer.site{background:var(--ink);color:#AEB5BC;padding:70px 0 40px;font-size:14px}
+footer.site .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer.site h5{color:#fff;font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+footer.site a{display:block;padding:4px 0;transition:color 200ms ease}
+footer.site a:hover{color:#fff}
+footer.site .logo{align-items:flex-start;color:#fff;margin-bottom:16px}
+.copy{border-top:1px solid var(--line);margin-top:50px;padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px}
+@media (max-width:800px){footer.site .wrap{grid-template-columns:1fr}}
+
+/* Floating WhatsApp */
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(0,0,0,.45);transition:transform 160ms var(--ease-out)}
+.fab:active{transform:scale(.94)}
+.fab svg{width:28px;height:28px;color:#fff}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity 700ms var(--ease-out),transform 700ms var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:60ms}.rv.d2{transition-delay:120ms}.rv.d3{transition-delay:180ms}
+.hero .rv{transition-duration:900ms}
+@media (prefers-reduced-motion:reduce){
+  .rv{transform:none;transition:opacity 300ms ease}
+  .ticker-track{animation:none}
+  html{scroll-behavior:auto}
+  .card,.card img,.gal img{transition:none}
+}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<div class="preview" id="preview">
+  <span data-i18n="preview"><b>Prévia</b> de site preparada para o Troia la Romana. Proposta, não é o site oficial.</span>
+  <button aria-label="Fechar" onclick="this.parentElement.remove()">✕</button>
+</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Troia la Romana"><b>TROIA LA ROMANA</b><span>Pizza &amp; Gelato</span></a>
+    <ul>
+      <li><a href="#sobre" data-i18n="nav.about">A casa</a></li>
+      <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+      <li><a href="#galeria" data-i18n="nav.gallery">Galeria</a></li>
+      <li><a href="#avaliacoes" data-i18n="nav.reviews">Avaliações</a></li>
+      <li><a href="#visitar" data-i18n="nav.visit">Visitar</a></li>
+    </ul>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Idioma">
+        <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-red" href="#visitar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg><span data-i18n="cta.book">Reservar mesa</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow rv" style="color:#F2C6A0"><span class="flag"><i></i><i></i><i></i></span>&nbsp;&nbsp;<span data-i18n="hero.eyebrow">Marina de Tróia · Cozinha italiana</span></div>
+      <h1 class="rv d1"><span data-i18n="hero.t1">Massa fina,</span><br><em data-i18n="hero.t2">mesa cheia</em><br><span data-i18n="hero.t3">&amp; vista para a</span> <span class="scr" data-i18n="hero.t4">marina</span></h1>
+      <p class="lead rv d2" data-i18n="hero.lead">Pizzas estaladiças, pastas com marisco fresco e gelato, a poucos passos do cais e da praia. Para almoçar depois do catamarã ou jantar ao pôr do sol.</p>
+      <div class="ctas rv d3">
+        <a class="btn btn-red" id="heroWa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.3A11 11 0 1 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-2.8.8.8-2.8-.2-.3A9 9 0 1 1 12 20.5Zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.3-.5.3-.5.8-1.6.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.2-1.3l-.6-.3Z"/></svg><span data-i18n="cta.wa">Reservar pelo WhatsApp</span></a>
+        <a class="btn btn-ghost" href="#menu" data-i18n="cta.menu">Ver o menu</a>
+      </div>
+      <div class="chips rv d3">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.5 5.7 21l1.6-7L2 9.3l7-.7z"/></svg><b>4,3</b>&nbsp;Tripadvisor</span>
+        <span class="chip"><b>Travellers' Choice</b></span>
+        <span class="chip" data-i18n="hero.price"><b>€20–25</b>&nbsp;por pessoa</span>
+      </div>
+    </div>
+    <div class="collage rv d2" aria-hidden="true">
+      <figure class="c1"><img src="img/lagosta.jpg" alt=""></figure>
+      <figure class="c2"><img src="img/pizzas.jpg" alt=""></figure>
+      <figure class="c3"><img src="img/burrata.jpg" alt=""></figure>
+      <div class="stamp"><div><b>Nº 3</b><span data-i18n="hero.stamp">em Tróia</span></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<section class="about" id="sobre">
+  <div class="wrap">
+    <div class="about-img rv">
+      <img src="img/balcao.jpg" alt="Balcão do Troia la Romana com o lema da casa">
+      <div class="tag"><q data-i18n="about.motto">A melhor rede social ainda é uma mesa cheia de amigos.</q><small data-i18n="about.mottoSrc">Escrito na nossa parede</small></div>
+    </div>
+    <div>
+      <div class="eyebrow rv" data-i18n="about.eyebrow">A casa</div>
+      <h2 class="h2 rv d1" style="margin:14px 0 24px" data-i18n-html="about.title">Um pedaço de Itália <em>no coração</em> da Marina de Tróia</h2>
+      <p class="lead rv d2" data-i18n="about.p1">No Troia la Romana a massa é estendida à mão e vai ao forno fina e estaladiça. Ao lado das pizzas, pastas com camarão e lagosta, burrata cremosa, saladas frescas e um bom gelato para fechar.</p>
+      <p class="lead rv d2" data-i18n="about.p2">A sala é acolhedora, com palha, verde e o tricolore nas paredes, perfeita para um jantar a dois, um almoço de família ou um grupo de amigos depois da praia. Temos esplanada, take-away e uma carta de vinhos com o melhor do Alentejo e da Comporta.</p>
+      <div class="facts rv d3">
+        <div><b>15</b><span data-i18n="about.f1">pizzas no forno</span></div>
+        <div><b>140 m</b><span data-i18n="about.f2">da Praia Bico das Lulas</span></div>
+        <div><b>4,7</b><span data-i18n="about.f3">nota do atendimento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sig" id="destaques">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-i18n="sig.eyebrow">Os favoritos da casa</div><h2 class="h2" data-i18n-html="sig.title">O que <em>tem</em> de provar</h2></div>
+      <a class="btn btn-dark" href="#menu" data-i18n="sig.all">Menu completo →</a>
+    </div>
+    <div class="cards">
+      <article class="card rv"><div class="ph"><img src="img/nero.jpg" alt="Linguini nero com camarão"></div><div class="bd"><h3>Linguini Nero al Gamberetti</h3><p data-i18n="sig.c1">Massa negra com camarão, alho e coentros.</p><div class="pr"><span data-i18n="sig.sea">Do mar</span>23,50 €</div></div></article>
+      <article class="card rv d1"><div class="ph"><img src="img/lagosta.jpg" alt="Massa com lagosta"></div><div class="bd"><h3>Tagliatelle di Aragosta</h3><p data-i18n="sig.c2">Lagosta, tomate, manjericão, alho e raspa de limão.</p><div class="pr"><span data-i18n="sig.special">Especial</span>34,50 €</div></div></article>
+      <article class="card rv d2"><div class="ph"><img src="img/pizza-close.jpg" alt="Pizza de massa fina" style="object-position:center"></div><div class="bd"><h3 data-i18n="sig.h3">Pizzas de massa fina</h3><p data-i18n="sig.c3">15 receitas, da Margherita à Perla Nera com caviar negro. Estaladiças, feitas na hora.</p><div class="pr"><span data-i18n="sig.sig">Desde</span>14,50 €</div></div></article>
+      <article class="card rv d3"><div class="ph"><img src="img/burrata.jpg" alt="Burrata com rúcula e tomate"></div><div class="bd"><h3>Burrata</h3><p data-i18n="sig.c4">Rúcula, tomate e redução de vinagre balsâmico.</p><div class="pr"><span data-i18n="sig.share">Para partilhar</span>12,50 €</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-i18n="menu.eyebrow">Menu</div><h2 class="h2" data-i18n-html="menu.title">A nossa <em>carta</em></h2></div>
+      <p class="lead" data-i18n="menu.lead">Preços com IVA incluído. Peça ingredientes extra em qualquer pizza.</p>
+    </div>
+    <div class="tabs-wrap"><div class="tabs" role="tablist" id="tabs"></div></div>
+    <div class="menu-grid" id="menuGrid" role="tabpanel"></div>
+    <p class="menu-note" data-i18n="menu.note">Tem alguma alergia ou intolerância? Fale connosco antes de pedir.</p>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-i18n="gal.eyebrow">Galeria</div><h2 class="h2" data-i18n-html="gal.title">Sente-se <em>connosco</em></h2></div>
+      <a class="btn btn-dark" href="https://www.instagram.com/troialaromana/" target="_blank" rel="noopener">@troialaromana</a>
+    </div>
+    <div class="gal">
+      <figure class="g1 rv"><img src="img/sala.jpg" alt="Sala do restaurante"><figcaption data-i18n="gal.c1">A sala</figcaption></figure>
+      <figure class="g2 rv d1"><img src="img/camarao.jpg" alt="Massa negra com camarão"></figure>
+      <figure class="rv d2"><img src="img/risotto.jpg" alt="Risotto com camarão"></figure>
+      <figure class="rv d3"><img src="img/lagosta.jpg" alt="Massa com lagosta" style="object-position:50% 70%"></figure>
+      <figure class="g5 rv"><img src="img/pizzas.jpg" alt="Pizzas na esplanada"><figcaption data-i18n="gal.c2">Pizzas na esplanada</figcaption></figure>
+      <figure class="g5 rv d1"><img src="img/balcao.jpg" alt="Balcão" style="object-position:50% 70%"><figcaption data-i18n="gal.c3">O balcão</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="avaliacoes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-i18n="rev.eyebrow">Avaliações</div><h2 class="h2" data-i18n-html="rev.title">Quem vem, <em>volta</em></h2></div>
+    </div>
+    <div class="scores">
+      <div class="score rv"><b>4,3</b><div class="stars">★★★★☆</div><small data-i18n="rev.s1">Tripadvisor · 55 avaliações · Travellers' Choice</small></div>
+      <div class="score rv d1"><b>4,7</b><div class="stars">★★★★★</div><small data-i18n="rev.s2">Atendimento, segundo o Tripadvisor</small></div>
+      <div class="score rv d2"><b>Nº 3</b><div class="stars">&nbsp;</div><small data-i18n="rev.s3">de 11 restaurantes em Tróia</small></div>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote rv"><q data-i18n="rev.q1">Massa fina e crocante, o equilíbrio entre o molho e o queijo foi perfeito.</q><footer><b>Isabel B.</b><span>Tripadvisor</span></footer></blockquote>
+      <blockquote class="quote rv d1"><q data-i18n="rev.q2">Pão de queijo delicioso de entrada; pizzas muito saborosas.</q><footer><b>Inês F.</b><span>Tripadvisor</span></footer></blockquote>
+      <blockquote class="quote rv d2"><q data-i18n="rev.q3">Fomos tratados como amigos da casa.</q><footer><b>Grupo de amigos</b><span>Tripadvisor</span></footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visitar">
+  <div class="wrap">
+    <div class="panel dark rv">
+      <div class="eyebrow" style="color:#F2C6A0" data-i18n="book.eyebrow">Reservas</div>
+      <h2 class="h2" style="margin-top:14px" data-i18n-html="book.title">Guardamos-lhe <em>uma mesa</em></h2>
+      <form id="bookForm" novalidate>
+        <label><span data-i18n="book.name">Nome</span><input id="fName" autocomplete="name" placeholder="Maria Silva"></label>
+        <label><span data-i18n="book.people">Pessoas</span><select id="fPeople"></select></label>
+        <label><span data-i18n="book.date">Data</span><input id="fDate" type="date"></label>
+        <label><span data-i18n="book.time">Hora</span><select id="fTime"></select></label>
+        <label class="full"><span data-i18n="book.notes">Observações</span><textarea id="fNotes" data-i18n-ph="book.notesPh" placeholder="Esplanada, cadeira de bebé, aniversário…"></textarea></label>
+        <a class="btn btn-red" id="bookBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.3A11 11 0 1 0 20.5 3.5Zm-3.5 10.3c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.3-.5.3-.5.8-1.6.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.2-1.3l-.6-.3Z"/></svg><span data-i18n="book.send">Enviar pedido pelo WhatsApp</span></a>
+        <p class="form-note" data-i18n="book.note">Abre o WhatsApp com a mensagem pronta. Confirmamos a sua mesa por lá.</p>
+      </form>
+      <div class="perks">
+        <div><b data-i18n="perk.t1">Esplanada</b><span data-i18n="perk.d1">Ao ar livre, junto à marina</span></div>
+        <div><b data-i18n="perk.t2">Take-away</b><span data-i18n="perk.d2">Pizzas para levar para a praia ou casa</span></div>
+        <div><b data-i18n="perk.t3">Grupos & festas</b><span data-i18n="perk.d3">Aniversários e jantares de empresa</span></div>
+      </div>
+    </div>
+    <div class="panel light rv d1">
+      <div class="eyebrow" data-i18n="visit.eyebrow">Visitar</div>
+      <h2 class="h2" style="margin-top:14px;font-size:clamp(34px,4vw,48px)" data-i18n="visit.title">Horário</h2>
+      <div class="hours" id="hours"></div>
+      <div class="contact">
+        <a href="https://www.google.com/maps/search/?api=1&query=Troia+la+Romana+Marina+de+Tr%C3%B3ia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Alameda da Marina de Tróia<small>7570-789 Tróia · Grândola</small></span></a>
+        <a href="tel:+351265497312"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span>+351 265 497 312<small data-i18n="visit.phone">Telefone</small></span></a>
+        <a href="https://wa.me/351964461351" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.3A11 11 0 1 0 20.5 3.5Z"/></svg><span>+351 964 461 351<small>WhatsApp</small></span></a>
+        <a href="mailto:troialaromana@hotmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>troialaromana@hotmail.com<small>Email</small></span></a>
+      </div>
+      <div class="map" aria-label="Mapa">
+        <svg viewBox="0 0 600 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="180" fill="#cfe3e6"/>
+          <path d="M0 120 C120 100 180 140 300 118 S480 70 600 90 V180 H0Z" fill="#efe7d6"/>
+          <path d="M360 0 C380 40 420 60 470 64 S560 50 600 40 V0Z" fill="#efe7d6"/>
+          <path d="M40 150 C160 130 260 160 380 136 S540 110 590 120" stroke="#fff" stroke-width="6" fill="none"/>
+          <g font-family="Manrope,sans-serif" font-size="11" fill="#5B6B70" font-weight="600"><text x="70" y="70">Rio Sado</text><text x="470" y="30">Setúbal ↑</text><text x="440" y="160">Praia de Tróia</text></g>
+          <circle cx="300" cy="112" r="22" fill="#E3122F" opacity=".18"/><circle cx="300" cy="112" r="8" fill="#E3122F" stroke="#fff" stroke-width="3"/>
+          <text x="316" y="100" font-family="Cormorant,serif" font-size="18" font-weight="600" fill="#0E1216">Troia la Romana</text>
+        </svg>
+        <a class="btn btn-dark" style="padding:10px 16px;font-size:13px" href="https://www.google.com/maps/search/?api=1&query=Troia+la+Romana+Marina+de+Tr%C3%B3ia" target="_blank" rel="noopener" data-i18n="visit.route">Como chegar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <div class="logo"><b>TROIA LA ROMANA</b><span>Pizza &amp; Gelato</span></div>
+      <p data-i18n="foot.p">Pizza, pasta e gelato na Marina de Tróia. Esplanada, take-away e reservas para grupos.</p>
+    </div>
+    <div>
+      <h5 data-i18n="foot.nav">Navegar</h5>
+      <a href="#menu" data-i18n="nav.menu">Menu</a><a href="#galeria" data-i18n="nav.gallery">Galeria</a><a href="#avaliacoes" data-i18n="nav.reviews">Avaliações</a><a href="#visitar" data-i18n="cta.book">Reservar mesa</a>
+    </div>
+    <div>
+      <h5 data-i18n="foot.follow">Siga-nos</h5>
+      <a href="https://www.instagram.com/troialaromana/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/search/top?q=Tr%C3%B3ia%20La%20Romana" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.tripadvisor.com.br/Restaurant_Review-g2334800-d27707556-Reviews-Troia_La_Romana_Pizaria_Pastas-Troia_Setubal_District_Alentejo.html" target="_blank" rel="noopener">Tripadvisor</a>
+    </div>
+  </div>
+  <div class="wrap copy"><span>© <span id="yr"></span> Troia la Romana · Alameda da Marina de Tróia</span><span data-i18n="foot.credit">Prévia de site por Arthur</span></div>
+</footer>
+
+<a class="fab" id="fab" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.3A11 11 0 1 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-2.8.8.8-2.8-.2-.3A9 9 0 1 1 12 20.5Zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.3-.5.3-.5.8-1.6.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.2-1.3l-.6-.3Z"/></svg></a>
+
+<script>
+const WA="351964461351";
+const MENU=[
+ {id:"couvert",pt:"Couvert",en:"Couvert",items:[
+  ["Pão","Bread","","",1.90],["Grissini","Grissini","","",1.85],["Queijo mozzarella ralado","Grated mozzarella","","",3.00],["Azeitonas","Olives","","",1.75],["Manteiga, querú ou paté de sardinha","Butter and pâtés","","",1.75],["Queijo seco curado","Dry cured cheese","","",5.50],["Presunto de porco preto","Black pork ham","","",16.50],["Paté caseiro de atum","Homemade tuna pâté","","",3.90]]},
+ {id:"tapas",pt:"Entradas & Sopas",en:"Starters & Soups",items:[
+  ["Sopa de legumes","Vegetable soup","","",4.50],["Gaspacho","Gazpacho","","",5.50],
+  ["Bruschetta Tróia Romana","Tróia Romana bruschetta","tomate, manjericão, azeitona preta e parmesão","tomato, basil, black olive and parmesan",10.50],
+  ["Bruschetta Ibérica","Iberian bruschetta","tomate, manjericão, mozzarella e presunto","tomato, basil, mozzarella and ham",12.50],
+  ["Bruschetta Filetti di Acciughe","Anchovy bruschetta","tomate, manjericão, mozzarella e filete de anchova","tomato, basil, mozzarella and anchovy fillet",13.50],
+  ["Burrata","Burrata","rúcula, tomate, burrata e vinagre balsâmico","arugula, tomato, burrata and balsamic",12.50,1],
+  ["Ovos rotos","Broken eggs","com presunto e bacon","with ham and bacon",16.50],
+  ["Gamberetti all'aglio","Garlic shrimp","camarão al ajillo","shrimp in garlic",18.50],
+  ["Pane all'aglio con formaggio","Garlic bread with cheese","pão, azeite de alho e mozzarella","bread, garlic oil and mozzarella",8.50],
+  ["Pane all'aglio con formaggio e pomodoro","Garlic bread, cheese & tomato","pão, azeite de alho, tomate e mozzarella","bread, garlic oil, tomato and mozzarella",9.50],
+  ["Pane all'aglio Tróia la Romana","Tróia la Romana garlic bread","salame picante, cebola, cogumelos, azeite de alho e mozzarella","spicy salami, onion, mushrooms, garlic oil and mozzarella",11.50],
+  ["Torrada com manteiga","Buttered toast","","",3.50]]},
+ {id:"pizzas",pt:"Pizzas",en:"Pizzas",items:[
+  ["Margherita","Margherita","tomate e mozzarella","tomato and mozzarella",14.50],
+  ["Queijo e fiambre","Cheese and ham","tomate, mozzarella, fiambre","tomato, mozzarella, ham",17.50],
+  ["Pancetta","Pancetta","tomate, mozzarella, pancetta, ananás e cogumelos","tomato, mozzarella, pancetta, pineapple and mushrooms",18.50],
+  ["Romana","Romana","tomate, mozzarella, presunto e cogumelos","tomato, mozzarella, ham and mushrooms",18.50],
+  ["Vegetariana","Vegetarian","tomate, mozzarella, tomate natural, azeitonas, pimentos, rúcula","tomato, mozzarella, fresh tomato, olives, peppers, arugula",19.50],
+  ["Salami picante","Spicy salami","tomate, mozzarella, salame, tomate seco e azeitonas","tomato, mozzarella, salami, sun-dried tomato and olives",19.50],
+  ["Ibérica","Iberian","tomate, mozzarella, presunto, pimentos, azeitonas e ovo","tomato, mozzarella, ham, peppers, olives and egg",19.50],
+  ["Tróia","Tróia","tomate, mozzarella, bacon e ovo","tomato, mozzarella, bacon and egg",19.50],
+  ["Quatro estações","Four seasons","ananás, cebola, fiambre, tomate, azeitonas, atum e oregãos","pineapple, onion, ham, tomato, olives, tuna and oregano",20.50],
+  ["4 Formaggi","4 Cheeses","mozzarella, parmesão, gorgonzola doce e picante","mozzarella, parmesan, sweet and spicy gorgonzola",20.50],
+  ["Salami picante Tróia la Romana","Tróia la Romana spicy salami","salame, tomate seco, cogumelos, pimentos e azeitonas","salami, sun-dried tomato, mushrooms, peppers and olives",21.50,1],
+  ["Atlântica","Atlantic","tomate, mozzarella, camarão e ananás","tomato, mozzarella, shrimp and pineapple",21.50],
+  ["Filetti di Acciughe","Anchovy fillets","tomate, mozzarella, filete de anchova e parmesão","tomato, mozzarella, anchovy fillet and parmesan",21.50],
+  ["Perla Nera","Black Pearl","fuet Espetec, azeitonas, caviar negro e queijo curado de ovelha, cabra e vaca","fuet Espetec sausage, olives, black caviar and cured sheep, goat & cow cheese",22.50,1],
+  {sub:["Ingredientes extra","Extra toppings"]},
+  ["Tomate cherry · rúcula · pimento · ananás · cebola · milho · fiambre · parmesão · queijo de cabra · ovo · cogumelos · atum · mozzarella","Cherry tomato · arugula · pepper · pineapple · onion · corn · ham · parmesan · goat cheese · egg · mushrooms · tuna · mozzarella","","",1.75],
+  ["Azeitonas","Olives","","",1.50],["Salame · pancetta · frango","Salami · pancetta · chicken","","",2.00],["Presunto · gorgonzola · burrata · salmão fumado","Cured ham · gorgonzola · burrata · smoked salmon","","",2.50],["Caviar negro","Black caviar","","",3.50]]},
+ {id:"pastas",pt:"Pastas",en:"Pasta",items:[
+  ["Spaghetti al funghi","Spaghetti al funghi","molho de tomate, cogumelos porcini, parmesão, manjericão","tomato sauce, porcini, parmesan, basil",16.50],
+  ["Spaghetti alla carbonara","Spaghetti carbonara","guanciale, gema de ovo, parmesão","guanciale, egg yolk, parmesan",16.50],
+  ["Spaghetti al pesto","Spaghetti al pesto","pesto, manjericão e parmesão","pesto, basil and parmesan",16.50],
+  ["Spaghetti al prosciutto cotto e panna","Spaghetti ham & cream","molho de tomate, bacon, natas, parmesão, manjericão","tomato sauce, bacon, cream, parmesan, basil",17.50],
+  ["Spaghetti alla bolognese","Spaghetti bolognese","molho de tomate, carne à bolonhesa, parmesão, manjericão","tomato sauce, bolognese, parmesan, basil",17.50],
+  ["Lasagna alla bolognese","Bolognese lasagna","","",17.50],["Lasagna alle verdure","Vegetarian lasagna","","",16.50],
+  ["Tagliatelle ai gamberetti","Shrimp tagliatelle","camarão, alho, molho de natas, salame picante","shrimp, garlic, cream sauce, spicy salami",23.50],
+  ["Linguini nero ai gamberetti","Black linguine with shrimp","camarão, alho, coentros","shrimp, garlic, coriander",23.50,1],
+  ["Tagliatelle di aragosta","Lobster tagliatelle","lagosta, tomate, manjericão, alho, cebola e raspa de limão","lobster, tomato, basil, garlic, onion and lemon zest",34.50,1]]},
+ {id:"carne",pt:"Carne & Saladas",en:"Meat & Salads",items:[
+  ["Picapau di vitello alla chef","Chef's veal picapau","com pickles","with pickles",26.50],
+  ["Bife do lombo com molho à Tróia Romana","Tenderloin, Tróia Romana sauce","vitela, molho de natas e queijo, cebolinho, parmesão","veal, cream & cheese sauce, chives, parmesan",29.50],
+  {sub:["Saladas","Salads"]},
+  ["Insalata caprese","Caprese salad","rúcula, tomate, mozzarella e balsâmico","arugula, tomato, mozzarella, balsamic",12.50],
+  ["Insalata di verdure","Vegetable salad","alface, rúcula, tomate, mozzarella, ovo, pepino, milho, cenoura, tostas, azeitonas","lettuce, arugula, tomato, mozzarella, egg, cucumber, corn, carrot, croutons, olives",13.50],
+  ["Insalata di tonno","Tuna salad","atum, ovo, cebola roxa, tomate, milho, tostas, molho césar","tuna, egg, red onion, tomato, corn, croutons, caesar dressing",16.50],
+  ["Insalata di pollo","Chicken salad","frango, ovo, cenoura, tomate, milho, tostas, molho césar","chicken, egg, carrot, tomato, corn, croutons, caesar dressing",16.50],
+  {sub:["Acompanhamentos","Sides"]},
+  ["Batata frita","French fries","","",5.50],["Arroz","Rice","","",5.00],["Pasta","Pasta","","",6.00],["Ovo estrelado","Fried egg","","",2.00]]},
+ {id:"doces",pt:"Gelato & Sobremesas",en:"Gelato & Desserts",items:[
+  ["1 bola de gelado","1 scoop of gelato","","",4.90],["2 bolas de gelado","2 scoops of gelato","","",7.90],
+  ["Tiramisù savoiardi","Tiramisù","","",6.50,1],["Brownie com bola de gelado","Brownie with gelato","","",6.50],
+  ["Quadrotto frutos do bosque","Forest fruit quadrotto","","",6.50],["Quadrotto de chocolate","Chocolate quadrotto","","",6.50],
+  ["Sericaia com ameixa d'Elvas","Sericaia with Elvas plum","doce conventual alentejano","traditional Alentejo dessert",6.50],
+  ["Mousse de chocolate","Chocolate mousse","","",6.00],["Fruta da época","Seasonal fruit","","",6.50]]},
+ {id:"vinhos",pt:"Vinhos & Sangrias",en:"Wine & Sangria",items:[
+  {sub:["Sangrias (jarro)","Sangria (jug)"]},
+  ["Sangria Aperol Spritz","Aperol Spritz sangria","","",28.50],["Sangria de espumante","Sparkling sangria","","",26.50],["Sangria tinto / branco","Red / white sangria","","",24.50],
+  {sub:["A copo","By the glass"]},
+  ["Branco · Tinto","White · Red","","",5.00],["Rosé","Rosé","","",5.50],
+  {sub:["Tintos","Reds"]},
+  ["Intocável (Comporta)","Intocável (Comporta)","","",17.50],["Catarina","Catarina","","",17.50],["Herdade da Comporta","Herdade da Comporta","","",19.50],["CW Comporta","CW Comporta","","",22.50],["D. Maria","D. Maria","","",24.50],["Monte da Peceguina","Monte da Peceguina","","",26.50],["Esporão Reserva","Esporão Reserva","","",34.50],["Cartuxa","Cartuxa","","",44.50],
+  {sub:["Brancos","Whites"]},
+  ["Intocável (Comporta)","Intocável (Comporta)","","",16.50],["Catarina","Catarina","","",18.50],["Herdade da Comporta","Herdade da Comporta","","",21.50],["CW Comporta","CW Comporta","","",22.50],["D. Maria","D. Maria","","",24.50],["Monte da Peceguina","Monte da Peceguina","","",26.50],["Esporão Reserva","Esporão Reserva","","",34.50],["Cartuxa","Cartuxa","","",49.50],["Pêra-Manca","Pêra-Manca","","",89.50],
+  {sub:["Verdes, rosés & italianos","Vinho verde, rosé & Italian"]},
+  ["Casal Garcia · Gazela","Casal Garcia · Gazela","","",14.50],["Soalheiro","Soalheiro","","",24.50],["Soalheiro Vinhas Novas","Soalheiro Vinhas Novas","","",34.50],["Mateus Rosé","Mateus Rosé","","",16.50],["Catarina Rosé","Catarina Rosé","","",19.50],["3 Mil Rosas","3 Mil Rosas","","",26.50],["Vinha da Rosa","Vinha da Rosa","","",28.50],["Chianti branco / tinto","White / red Chianti","","",21.50],["Prosecco Abbazia","Prosecco Abbazia","","",24.50],
+  {sub:["Espumantes","Sparkling"]},
+  ["Murganheira Bruto","Murganheira Brut","","",28.50],["Moët & Chandon","Moët & Chandon","","",89.00],["Moët & Chandon Ice Impérial","Moët & Chandon Ice Impérial","","",120.00]]},
+ {id:"bebidas",pt:"Bebidas & Cafés",en:"Drinks & Coffee",items:[
+  {sub:["Cervejas","Beers"]},
+  ["Imperial 0,25 l","Draught 0.25 l","","",3.00],["Imperial 0,5 l / caneca","Draught 0.5 l / mug","","",6.00],["Média · Heineken","Bottled beer","","",3.50],["Sem álcool","Alcohol-free","","",3.00],["Somersby · Bandida do Pomar","Cider","","",3.90],
+  {sub:["Gin & digestivos","Gin & digestifs"]},
+  ["Gin (Pig, Bombay, Bulldog, Hendrick's)","Gin (Pig, Bombay, Bulldog, Hendrick's)","","",10.00],["Aperol Spritz","Aperol Spritz","","",9.50],["Limoncello","Limoncello","","",6.50],["Medronho","Medronho","","",7.50],["Licor Beirão · Amarguinha","Licor Beirão · Amarguinha","","",5.50],["Ginja · Moscatel","Ginja · Moscatel","","",4.50],["Whisky (Jameson / Johnnie Walker Black)","Whisky (Jameson / Johnnie Walker Black)","","",8.50],
+  {sub:["Sem álcool","Soft drinks"]},
+  ["Refrigerantes","Soft drinks","","",3.25],["Sumo de laranja natural","Fresh orange juice","","",5.50],["Limonada natural","Fresh lemonade","","",5.00],["Água 0,5 l / 0,75 l","Still water 0.5 / 0.75 l","","",2.50],["Água das Pedras","Sparkling water","","",3.00],
+  {sub:["Cafetaria","Coffee"]},
+  ["Café · galão · descafeinado","Espresso · galão · decaf","","",2.50],["Duplo · cappuccino","Double · cappuccino","","",3.50],["Carioca · chá","Weak coffee · tea","","",2.00]]}
+];
+const T={
+ pt:{},
+ en:{
+  "preview":"<b>Website preview</b> prepared for Troia la Romana. A proposal, not the official site.",
+  "nav.about":"About","nav.menu":"Menu","nav.gallery":"Gallery","nav.reviews":"Reviews","nav.visit":"Visit",
+  "cta.book":"Book a table","cta.wa":"Book on WhatsApp","cta.menu":"See the menu",
+  "hero.eyebrow":"Tróia Marina · Italian kitchen","hero.t1":"Thin crust,","hero.t2":"full table","hero.t3":"& views of the","hero.t4":"marina",
+  "hero.lead":"Crispy pizzas, fresh seafood pasta and gelato, a short walk from the pier and the beach. Lunch after the ferry, or dinner at sunset.",
+  "hero.price":"<b>€20–25</b>&nbsp;per person","hero.stamp":"in Tróia",
+  "about.motto":"The best social network is still a table full of friends.","about.mottoSrc":"Written on our wall",
+  "about.eyebrow":"The house","about.title":"A slice of Italy <em>in the heart</em> of Tróia Marina",
+  "about.p1":"At Troia la Romana the dough is stretched by hand and baked thin and crispy. Alongside the pizzas: shrimp and lobster pasta, creamy burrata, fresh salads and good gelato to finish.",
+  "about.p2":"A cosy room with straw, greenery and the tricolore on the walls — perfect for a dinner for two, a family lunch or friends after the beach. Terrace, take-away and a wine list with the best of Alentejo and Comporta.",
+  "about.f1":"pizzas in the oven","about.f2":"from Bico das Lulas beach","about.f3":"service rating",
+  "sig.eyebrow":"House favourites","sig.title":"What you <em>must</em> try","sig.all":"Full menu →",
+  "sig.c1":"Squid-ink pasta with shrimp, garlic and coriander.","sig.c2":"Lobster, tomato, basil, garlic and lemon zest.","sig.h3":"Thin-crust pizzas","sig.c3":"15 recipes, from Margherita to Perla Nera with black caviar. Crispy and made to order.","sig.c4":"Arugula, tomato and balsamic reduction.",
+  "sig.sea":"From the sea","sig.special":"Special","sig.sig":"From","sig.share":"To share",
+  "menu.eyebrow":"Menu","menu.title":"Our <em>menu</em>","menu.lead":"Prices include VAT. Add extra toppings to any pizza.","menu.note":"Any allergies or intolerances? Please tell us before ordering.",
+  "gal.eyebrow":"Gallery","gal.title":"Take a <em>seat</em>","gal.c1":"The dining room","gal.c2":"Pizzas on the terrace","gal.c3":"The bar",
+  "rev.eyebrow":"Reviews","rev.title":"Those who come, <em>come back</em>","rev.s1":"Tripadvisor · 55 reviews · Travellers' Choice","rev.s2":"Service score on Tripadvisor","rev.s3":"of 11 restaurants in Tróia",
+  "rev.q1":"Thin, crunchy crust — the balance of sauce and cheese was perfect.","rev.q2":"Delicious cheese bread to start; very tasty pizzas.","rev.q3":"We were treated like friends of the house.",
+  "book.eyebrow":"Reservations","book.title":"We'll keep <em>a table</em> for you","book.name":"Name","book.people":"Guests","book.date":"Date","book.time":"Time","book.notes":"Notes","book.notesPh":"Terrace, high chair, birthday…","book.send":"Send request on WhatsApp","book.note":"Opens WhatsApp with the message ready. We confirm your table there.",
+  "perk.t1":"Terrace","perk.d1":"Outdoors, by the marina","perk.t2":"Take-away","perk.d2":"Pizzas to take to the beach or home","perk.t3":"Groups & parties","perk.d3":"Birthdays and company dinners","visit.eyebrow":"Visit","visit.title":"Opening hours","visit.phone":"Phone","visit.route":"Get directions →",
+  "foot.p":"Pizza, pasta and gelato in Tróia Marina. Terrace, take-away and group bookings.","foot.nav":"Explore","foot.follow":"Follow us","foot.credit":"Website preview by Arthur"
+ }
+};
+const DAYS={pt:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],en:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]};
+const HOURS=["12:00 – 23:45","12:00 – 16:00 · 18:00 – 22:30","12:00 – 16:00 · 18:00 – 22:30","12:00 – 16:00 · 18:00 – 22:30","12:00 – 16:00 · 18:00 – 20:30","12:00 – 16:00 · 18:00 – 22:30","12:00 – 23:45"];
+let lang="pt", cat="pizzas";
+try{const s=localStorage.getItem("tlr-lang");if(s==="en")lang="en"}catch(e){}
+
+// store PT defaults
+document.querySelectorAll("[data-i18n],[data-i18n-html]").forEach(el=>{const k=el.dataset.i18n||el.dataset.i18nHtml;T.pt[k]=el.innerHTML});
+document.querySelectorAll("[data-i18n-ph]").forEach(el=>{T.pt[el.dataset.i18nPh]=el.placeholder});
+
+const eur=n=>(lang==="pt"?n.toFixed(2).replace(".",","):n.toFixed(2))+" €";
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function renderTabs(){
+  const t=document.getElementById("tabs");
+  t.innerHTML=MENU.map(c=>`<button class="tab" role="tab" data-c="${c.id}" aria-selected="${c.id===cat}">${c[lang]}</button>`).join("");
+}
+function renderMenu(){
+  const c=MENU.find(x=>x.id===cat), L=lang==="pt"?0:1;
+  document.getElementById("menuGrid").innerHTML=c.items.map(i=>{
+    if(i.sub) return `<div class="sub">${esc(i.sub[L])}</div>`;
+    const d=i[2+L]; const star=i[5]?`<span class="badge">${lang==="pt"?"Favorito":"Favourite"}</span>`:"";
+    return `<div class="item"><h4>${esc(i[L])}${star}</h4><span class="p">${eur(i[4])}</span>${d?`<p class="d">${esc(d)}</p>`:""}</div>`;
+  }).join("");
+}
+document.getElementById("tabs").addEventListener("click",e=>{
+  const b=e.target.closest(".tab"); if(!b||b.dataset.c===cat) return;
+  cat=b.dataset.c; document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  b.scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"});
+  const g=document.getElementById("menuGrid");
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){renderMenu();return}
+  g.classList.add("swap"); setTimeout(()=>{renderMenu();g.classList.remove("swap")},170);
+});
+
+function renderHours(){
+  const today=new Date().getDay(), order=[1,2,3,4,5,6,0];
+  document.getElementById("hours").innerHTML=order.map(d=>`<div class="${d===today?"today":""}"><span>${DAYS[lang][d]}</span><span>${HOURS[d]}</span></div>`).join("");
+}
+function ticker(){
+  const w=lang==="pt"?["Pizza de massa fina","Pasta fresca","Marisco","Gelato","Vinhos do Alentejo","Esplanada na marina","Take-away"]:["Thin-crust pizza","Fresh pasta","Seafood","Gelato","Alentejo wines","Marina terrace","Take-away"];
+  const s=w.map(x=>`<span>${x}</span>`).join("");
+  document.getElementById("ticker").innerHTML=s+s+s+s;
+}
+function waLink(msg){return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`}
+function updateBooking(){
+  const n=document.getElementById("fName").value.trim(), p=document.getElementById("fPeople").value,
+        d=document.getElementById("fDate").value, h=document.getElementById("fTime").value, o=document.getElementById("fNotes").value.trim();
+  let dt=d; try{if(d){dt=new Date(d+"T12:00").toLocaleDateString(lang==="pt"?"pt-PT":"en-GB",{weekday:"long",day:"numeric",month:"long"})}}catch(e){}
+  const msg=lang==="pt"
+   ?`Olá Troia la Romana! Gostaria de reservar uma mesa.\n\n👤 Nome: ${n||"—"}\n👥 Pessoas: ${p}\n📅 Data: ${dt||"—"}\n🕗 Hora: ${h}${o?`\n📝 ${o}`:""}\n\nObrigado!`
+   :`Hello Troia la Romana! I'd like to book a table.\n\n👤 Name: ${n||"—"}\n👥 Guests: ${p}\n📅 Date: ${dt||"—"}\n🕗 Time: ${h}${o?`\n📝 ${o}`:""}\n\nThank you!`;
+  document.getElementById("bookBtn").href=waLink(msg);
+}
+function setupForm(){
+  const ps=document.getElementById("fPeople"); ps.innerHTML="";
+  for(let i=1;i<=12;i++) ps.add(new Option(i===12?"12+":String(i),i===12?"12+":i)); ps.value="2";
+  const ts=document.getElementById("fTime"); ["12:00","12:30","13:00","13:30","14:00","14:30","19:00","19:30","20:00","20:30","21:00","21:30"].forEach(t=>ts.add(new Option(t,t))); ts.value="20:00";
+  const di=document.getElementById("fDate"), now=new Date(); di.min=now.toISOString().slice(0,10); di.value=di.min;
+  document.getElementById("bookForm").addEventListener("input",updateBooking);
+  document.getElementById("bookForm").addEventListener("submit",e=>e.preventDefault());
+}
+function applyLang(){
+  document.documentElement.lang=lang==="pt"?"pt-PT":"en";
+  const D=T[lang];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const v=D[el.dataset.i18n]??T.pt[el.dataset.i18n];if(v!=null)el.innerHTML=v});
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{const v=D[el.dataset.i18nHtml]??T.pt[el.dataset.i18nHtml];if(v!=null)el.innerHTML=v});
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{el.placeholder=D[el.dataset.i18nPh]??T.pt[el.dataset.i18nPh]});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
+  renderTabs();renderMenu();renderHours();ticker();updateBooking();
+  const hi=lang==="pt"?"Olá! Gostaria de reservar uma mesa no Troia la Romana.":"Hello! I'd like to book a table at Troia la Romana.";
+  document.getElementById("heroWa").href=waLink(hi);document.getElementById("fab").href=waLink(hi);
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{lang=b.dataset.lang;try{localStorage.setItem("tlr-lang",lang)}catch(e){}applyLang()}));
+document.getElementById("yr").textContent=new Date().getFullYear();
+setupForm();applyLang();
+
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -60px 0px"});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
